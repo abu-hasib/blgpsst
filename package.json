@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@editorjs/editorjs": "^2.28.0",
     "@radix-ui/themes": "^2.0.0",
     "clsx": "^2.0.0",
     "lucide-react": "^0.284.0",

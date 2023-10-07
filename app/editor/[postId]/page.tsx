@@ -1,3 +1,4 @@
+import Editor from "@/components/editor";
 import { Icons } from "@/components/icons";
 import { Button } from "@radix-ui/themes";
 import Link from "next/link";
@@ -19,6 +20,9 @@ export default function EditorPage({ params }: any) {
         <Button className="bg-black" size="4">
           Save
         </Button>
+      </div>
+      <div>
+        <Editor />
       </div>
     </div>
   );
