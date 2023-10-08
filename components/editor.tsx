@@ -8,8 +8,7 @@ import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
 import { Icons } from "./icons";
 import { Button } from "@radix-ui/themes";
 import { useForm } from "react-hook-form";
-import prisma from "@/lib/prisma";
-import { Prisma } from "@prisma/client";
+import { useSearchParams } from "next/navigation";
 
 interface EditorProps {
   post: Post;
@@ -53,26 +52,18 @@ export default function Editor({ post }: EditorProps) {
   const [isSaving, setSave] = useState(false);
   const { register, handleSubmit } = useForm<FormData>();
 
-  const onSubmit = async (data: FormData) => {
-    console.log({ data });
-
-    const response = await fetch(`/api/posts/${post.id}`, {
-      method: "POST"
-    })
-    // const post = await prisma.user.create({
-    //   data: {
-    //     name: "Bob",
-    //     email: "bob@prisma.io",
-    //     posts: {
-    //       create: {
-    //         title: "Hello content",
-    //         content: "This is it"
-    //       },
-    //     },
-    //   },
-    // });
-    // console.log({post})
-    console.log("submitting");
+  const onSubmit = async (data: any) => {
+    setSave(true)
+    const response = await fetch(`/api/posts`, {
+      method: "PATCH",
+      body: JSON.stringify({
+        postId: post.id,
+        title: data.title,
+        content: data.content,
+      }),
+    });
+    if(!response.ok) throw new Error()
+    setSave(false)
   };
 
   return (

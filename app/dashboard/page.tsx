@@ -24,7 +24,7 @@ export default async function DashboardPage() {
   const posts = await getCurrentUserPosts();
 
   return (
-    <section>
+    <section className="space-y-6 w-[90%]">
       <div className="flex justify-between">
         <h1 className="text-3xl font-bold">Posts</h1>
         <CreatePost />

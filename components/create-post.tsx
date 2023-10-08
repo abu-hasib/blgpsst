@@ -5,28 +5,28 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function CreatePost() {
-  const [isLoading, setLoading] = useState(false)
-  const router = useRouter()
+  const [isLoading, setLoading] = useState(false);
+  const router = useRouter();
   const handleClick = async () => {
     console.log("cliec..");
-    setLoading(true)
+    setLoading(true);
     const response = await fetch("/api/posts", {
       method: "POST",
       body: JSON.stringify({
-        title: "Untitled#"
-      })
+        title: "Untitled#",
+      }),
     });
 
-    if(!response.ok) {
-      console.error("Oh no")
+    if (!response.ok) {
+      console.error("Oh no");
     }
-    setLoading(false)
+    setLoading(false);
     const post = await response.json();
-    router.push(`/editor/${post.id}`)
+    router.push(`/editor/${post.id}`);
   };
 
   return (
-    <Button onClick={handleClick}>
+    <Button onClick={handleClick} size="2" className="p-6">
       {isLoading && <Icons.spinner />}
       <Icons.add /> Create
     </Button>
