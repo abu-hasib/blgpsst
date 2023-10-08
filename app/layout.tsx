@@ -21,7 +21,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Theme>
           {children}
-          <ThemePanel />
+          {/* <ThemePanel /> */}
         </Theme>
       </body>
     </html>

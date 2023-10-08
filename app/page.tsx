@@ -3,13 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 
 async function getPosts() {
-  const response = await fetch("https://dummyjson.com/posts", {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/post?limit=10`, {
     headers: {
-      "app-id": "0JyYiOQXQQr5H9OEn21312",
+      "app-id": "652274d22d9ce33ceba499b1",
     },
+    cache: "no-cache"
   });
   const payload = await response.json();
-  return payload.posts;
+  return payload.data;
 }
 
 export default async function Home() {
@@ -24,7 +25,7 @@ export default async function Home() {
             {posts.map((post: any) => (
               <article key={post.id}>
                 <Link href={`${post.id}`}>
-                <PostItem post={post} />
+                  <PostItem post={post} />
                 </Link>
               </article>
             ))}

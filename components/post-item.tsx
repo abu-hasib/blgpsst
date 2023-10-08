@@ -5,5 +5,10 @@ interface PostItem {
 }
 
 export default function PostItem({ post }: PostItem) {
-  return <h1>{post.title}</h1>;
+  return (
+    <article>
+      <h1>{post.text}</h1>
+      <time>{`${new Date(post.publishDate)}`}</time>
+    </article>
+    )
 }
