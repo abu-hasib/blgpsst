@@ -9,7 +9,7 @@ export default function CreatePost() {
   const router = useRouter();
   const handleClick = async () => {
     setLoading(true);
-    const response = await fetch("/api/posts", {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/posts`, {
       method: "POST",
       body: JSON.stringify({
         title: "Untitled",

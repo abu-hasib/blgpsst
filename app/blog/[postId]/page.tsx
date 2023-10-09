@@ -1,31 +1,34 @@
+import prisma from "@/lib/prisma";
 import Image from "next/image";
 
 async function fetchAPost(postId: string) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/post/${postId}`, {
-    headers: {
-      "app-id": "652274d22d9ce33ceba499b1",
+  const post = await prisma.post.findFirst({
+    where: {
+      id: parseInt(postId)
     },
-  });
-  const json = await res.json();
-  return json;
+    include: {author: true}
+  })
+
+  return post
 }
 
 export default async function PostPage({ params }: any) {
   const post = await fetchAPost(params.postId);
-  const date = new Date(post.publishDate);
-  console.log({ post });
+  if(!post) return null
+
+  const date = new Date(post.updatedAt);
+
   return (
     <div className="flex-1">
       <div className="w-[900px] mx-auto p-8">
         <div className="space-y-8">
-          {/* <div className="aspect-square h-[60%] w-full border border-gray-100 rounded-lg p-1"> */}
           <div>
-            <h1 className="font-extrabold text-4xl capitalize">{post.text}</h1>
+            <h1 className="font-extrabold text-4xl capitalize">{post.title}</h1>
             <p className="text-gray-400">{`${date.toDateString()} `}</p>
             <div className="flex items-center gap-2">
               <div className="aspect-square h-[50px] w-[50px] rounded-full border border-gray-500">
                 <Image
-                  src={post.owner.picture}
+                  src={post.author.avatar}
                   alt={`${post.id}`}
                   width={165}
                   height={165}
@@ -33,12 +36,12 @@ export default async function PostPage({ params }: any) {
                   className="rounded-full"
                 />
               </div>
-              <span className="font-medium">{post.owner.firstName}</span>
+              <span className="font-medium">{post.author.name}</span>
             </div>
           </div>
 
           <Image
-            src={post.image}
+            src={post.url}
             alt={`${post.id}`}
             width={165}
             height={10}
@@ -63,7 +66,6 @@ export default async function PostPage({ params }: any) {
             reiciendis cum, quis rem optio quaerat ea atque quos sequi sunt
             maxime?
           </p>
-          {/* </div> */}
         </div>
       </div>
     </div>

@@ -19,6 +19,8 @@ model User {
   name String?
 
   posts Post[]
+
+  avatar String
 }
 
 model Post {
@@ -37,4 +39,6 @@ model Post {
   createdAt DateTime @default(now())
   
   updatedAt DateTime @updatedAt
+
+  url String
 }

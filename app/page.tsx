@@ -18,21 +18,8 @@ export default async function Home() {
   // console.log({ posts });
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div>
-        <hr className="my-8" />
-        {/* {posts?.length ? (
-          <div>
-            {posts.map((post: any) => (
-              <article key={post.id}>
-                <Link href={`${post.id}`}>
-                  <PostItem post={post} />
-                </Link>
-              </article>
-            ))}
-          </div>
-        ) : (
-          <p>NO posts</p>
-        )} */}
+      <div className="grid place-items-center">
+        <p className="text-5xl font-black">Blgpsst! by Ridwan</p>
       </div>
     </main>
   );

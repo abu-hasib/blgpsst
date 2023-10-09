@@ -17,6 +17,7 @@ export type Post = {
   authorId: number;
   createdAt: Date;
   updatedAt: Date;
+  url: string
 };
 
 export type Posts = Post[];

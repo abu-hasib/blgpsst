@@ -17,9 +17,10 @@ export async function POST(req: Request) {
       data: {
         title,
         content: "",
+        url: "https://picsum.photos/1200",
         author: {
           connect: {
-            email: "bob@prisma.io",
+            email: "ridwan@prisma.io",
           },
         },
       },

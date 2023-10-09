@@ -1,9 +1,9 @@
-import { Post } from "@/types";
+import { Post, Posts } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 
 interface BlogItemProps {
-  post: { id: number; image: string, text: string };
+  post: Post
 }
 
 export default function BlogItem({ post }: BlogItemProps) {
@@ -12,7 +12,7 @@ export default function BlogItem({ post }: BlogItemProps) {
       <Link href={`/blog/${post.id}`}>
         <div className="aspect-square h-[80%] w-full border border-gray-100 rounded-lg p-1">
           <Image
-            src={post.image}
+            src={post.url}
             alt={`${post.id}`}
             width={165}
             height={165}
@@ -20,7 +20,7 @@ export default function BlogItem({ post }: BlogItemProps) {
             className="rounded-lg"
           />
         </div>
-        <h2 className="text-2xl font-bold capitalize">{post.text}</h2>
+        <h2 className="text-2xl font-bold capitalize">{post.title}</h2>
       </Link>
     </article>
   );
