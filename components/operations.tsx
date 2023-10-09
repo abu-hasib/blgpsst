@@ -46,7 +46,7 @@ export default function Operations({ post }: Operations) {
             color="red"
             onSelect={() => setDialog(true)}
           >
-            Delete
+            Remove
           </DropdownMenu.Item>
         </DropdownMenu.Content>
       </DropdownMenu.Root>
