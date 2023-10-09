@@ -1,22 +1,21 @@
 import UserPost from "@/components/post";
+import prisma from "@/lib/prisma";
 
 async function getCurrentUserPosts() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/dashboard`, {
-    method: "GET",
-    cache: "no-cache"
-  })
+  // const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/dashboard`, {
+  //   method: "GET",
+  //   cache: "no-cache"
+  // })
 
-  // const posts = await prisma.post.findMany({
-  //   where: {
-  //     authorId: 1,
-  //   },
-  //   orderBy: {
-  //     updatedAt: "desc",
-  //   },
-  // });
-  const json = await res.json()
-  console.log({ posts: json });
-  return json.posts;
+  const posts = await prisma.post.findMany({
+    where: {
+      authorId: 1,
+    },
+    orderBy: {
+      updatedAt: "desc",
+    },
+  });
+  return posts
 }
 
 export default async function DashboardPage() {
