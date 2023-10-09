@@ -9,7 +9,8 @@ import {
   type XIcon as LucideIcon,
   Grid,
   List,
-  Search
+  Search,
+  FileText
 } from "lucide-react"
 
 export type Icon = typeof LucideIcon
@@ -28,6 +29,7 @@ export const Icons = {
   grid: Grid,
   list: List,
   search: Search,
+  post: FileText,
   gitHub: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"
