@@ -8,12 +8,11 @@ export default function CreatePost() {
   const [isLoading, setLoading] = useState(false);
   const router = useRouter();
   const handleClick = async () => {
-    console.log("cliec..");
     setLoading(true);
     const response = await fetch("/api/posts", {
       method: "POST",
       body: JSON.stringify({
-        title: "Untitled#",
+        title: "Untitled",
       }),
     });
 
@@ -27,8 +26,8 @@ export default function CreatePost() {
 
   return (
     <Button onClick={handleClick} size="3">
-      {isLoading && <Icons.spinner />}
-      <Icons.add /> Create
+      {isLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />}
+      New Post
     </Button>
   );
 }

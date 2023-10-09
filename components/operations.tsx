@@ -18,7 +18,7 @@ export default function Operations({ post }: Operations) {
 
   const handleDelete = async() => {
     setRemoving(true)
-    const response = await fetch('/api/posts', {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/posts`, {
       method: "DELETE",
       body: JSON.stringify({
         postId: post.id

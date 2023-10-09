@@ -6,5 +6,14 @@ export async function GET(req: Request) {
 
   console.log({ user });
 
-  return Response.json({ user });
+  const posts = await prisma.post.findMany({
+    where: {
+      authorId: 1,
+    },
+    orderBy: {
+      updatedAt: "desc",
+    },
+  });
+
+  return Response.json({ posts });
 }

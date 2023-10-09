@@ -10,58 +10,20 @@ import { Button } from "@radix-ui/themes";
 import { useForm } from "react-hook-form";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 interface EditorProps {
   post: Post;
 }
 
 export default function Editor({ post }: EditorProps) {
-  //   const editorRef = useRef<EditorJS>();
-  //   const [isMounted, setMounted] = useState(false);
-
-  //   const initEditor = useCallback(() => {
-  //     if (!editorRef.current) {
-  //       const editor = new EditorJS({
-  //         holder: "editor",
-  //         onReady: () => {
-  //           editorRef.current = editor;
-  //         },
-  //         data: DEFAULT_INITIAL_DATA,
-  //         tools: {
-  //             header: Header
-  //         },
-  //         onChange: async () => {
-  //           let content = await editor.saver.save();
-  //           console.log(content);
-  //         },
-  //       });
-  //     }
-  //   }, []);
-
-  //   useEffect(() => {
-  //     if (typeof window !== undefined) setMounted(true);
-  //   }, []);
-
-  //   useEffect(() => {
-  //     if (isMounted) initEditor();
-
-  //     return () => {
-  //       editorRef.current?.destroy();
-  //       editorRef.current = undefined;
-  //     };
-  //   }, [isMounted, initEditor]);
+  const router = useRouter()
   const [isSaving, setSave] = useState(false);
   const { register, handleSubmit } = useForm<FormData>();
-  const [isAddImage, setAddImage] = useState(false);
-  const fileRef = useRef<ElementRef<"input">>(null)
-  const handleClick = () => {
-   if(!fileRef.current) return
-   fileRef?.current?.click
-  }
 
   const onSubmit = async (data: any) => {
     setSave(true);
-    const response = await fetch(`/api/posts`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/posts`, {
       method: "PATCH",
       body: JSON.stringify({
         postId: post.id,
@@ -87,25 +49,8 @@ export default function Editor({ post }: EditorProps) {
             Save
           </Button>
         </div>
-        <div id="editor">{/* <input type="text" value={post.title} /> */}</div>
+        <div id="editor"></div>
         <div className="w-[800px] mx-auto space-y-4">
-          <div
-            className="flex items-center gap-2 p-1.5 rounded-xl hover:bg-[#e2e8f0] w-fit"
-            onClick={() => setAddImage(!isAddImage)}
-          >
-            <Icons.sun />
-            <span>Add cover</span>
-          </div>
-          {/* {isAddImage && (
-            <>
-              <Image src={""} width={100} height={100} alt="cover" />
-              <input ref={fileRef} type="file" name="" id="" className="hidden" />
-              <button onClick={handleClick}>
-
-              <Icons.add />
-              </button>
-            </>
-          )} */}
           <input
             type="text"
             placeholder="Untitled"
