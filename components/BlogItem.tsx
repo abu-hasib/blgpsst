@@ -9,7 +9,7 @@ interface BlogItemProps {
 export default function BlogItem({ post }: BlogItemProps) {
   return (
     <article>
-      <Link href={`${post.id}`}>
+      <Link href={`/blog/${post.id}`}>
         <div className="aspect-square h-[80%] w-full border border-gray-100 rounded-lg p-1">
           <Image
             src={post.image}

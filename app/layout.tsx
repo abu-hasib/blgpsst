@@ -5,6 +5,10 @@ import "@radix-ui/themes/styles.css";
 import { Theme, ThemePanel } from "@radix-ui/themes";
 import { Provider } from "react-redux";
 import { Providers } from "@/redux/provider";
+import { MainNav } from "@/components/main-nav";
+import { siteConfig } from "@/config/site";
+import Login from "@/components/login";
+import RQProviders from "@/components/providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +26,17 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Theme>
-          <Providers>{children}</Providers>
+          <Providers>
+            <RQProviders>
+              <header className="sticky top-0 z-40 border-b bg-white">
+                <div className="container flex h-16 items-center justify-between py-4 px-6">
+                  <MainNav items={siteConfig.mainNav} />
+                  <Login />
+                </div>
+              </header>
+              {children}
+            </RQProviders>
+          </Providers>
         </Theme>
       </body>
     </html>

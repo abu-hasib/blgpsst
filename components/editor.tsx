@@ -112,12 +112,13 @@ export default function Editor({ post }: EditorProps) {
             id="title"
             defaultValue={post.title}
             className="outline-none w-full text-5xl font-bold placeholder:text-gray-500"
+            // @ts-ignore
             {...register("title")}
           />
           <textarea
             id="content"
+            // @ts-ignore
             {...register("content")}
-            // id="cont"
             cols={30}
             rows={10}
             className="outline-none w-full"

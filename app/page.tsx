@@ -14,13 +14,13 @@ async function getPosts() {
 }
 
 export default async function Home() {
-  const posts = await getPosts();
-  console.log({ posts });
+  // const posts = await getPosts();
+  // console.log({ posts });
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div>
         <hr className="my-8" />
-        {posts?.length ? (
+        {/* {posts?.length ? (
           <div>
             {posts.map((post: any) => (
               <article key={post.id}>
@@ -32,7 +32,7 @@ export default async function Home() {
           </div>
         ) : (
           <p>NO posts</p>
-        )}
+        )} */}
       </div>
     </main>
   );

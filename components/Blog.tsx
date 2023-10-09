@@ -6,20 +6,28 @@ import { Icons } from "./icons";
 import SearchDialog from "./SearchDialog";
 import { useSelector } from "react-redux";
 import { useAppSelector } from "@/redux/hooks";
+import { Pagination } from "./pagination";
+import { useQuery } from "@tanstack/react-query";
 
 interface BlogProps {
   posts: {}[];
 }
 
+
+
 export default function Blog({ posts }: BlogProps) {
   const [isGrid, setIsGrid] = useState(true);
   const [showDialog, setDialog] = useState<boolean>(false);
   const { searchTerm } = useAppSelector((state) => state.searchReducer);
+  const [page, setPage] = useState<number>(1)
+  // const {} = useQuery({
+  //   queryKey: ["post"],
+  //   queryFn: 
+  // })
 
   return (
     <>
       <div className="flex justify-between items-center">
-        <pre className="text-5xl">{searchTerm}</pre>
         <h1 className="font-bold text-4xl">Blog</h1>
         <div className=" divide-x-2 divide-solid">
           <div className="flex gap-2">
@@ -47,10 +55,11 @@ export default function Blog({ posts }: BlogProps) {
           } gap-10 `}
         >
           {posts
-            .filter((post: any) => post.text.includes(searchTerm))
+            .filter((post: any) => post.title.includes(searchTerm))
             .map((post: any) => (
               <BlogItem key={post.id} post={post} />
             ))}
+            <Pagination pageCount={20} page={page} setPage={setPage} />
         </div>
       ) : (
         <p>NO posts</p>

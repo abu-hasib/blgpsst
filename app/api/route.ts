@@ -1,7 +1,10 @@
 import prisma from "@/lib/prisma";
 
 export async function GET(req: Request) {
-    const post = await prisma.post.findMany()
+  console.log("dashing....");
+  const user = await prisma.user.findFirst();
 
-    return Response.json({post})
+  console.log({ user });
+
+  return Response.json({ user });
 }
