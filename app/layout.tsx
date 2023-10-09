@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@radix-ui/themes/styles.css";
 import { Theme, ThemePanel } from "@radix-ui/themes";
+import { Provider } from "react-redux";
+import { Providers } from "@/redux/provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,8 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Theme>
-          {children}
-          {/* <ThemePanel /> */}
+          <Providers>{children}</Providers>
         </Theme>
       </body>
     </html>

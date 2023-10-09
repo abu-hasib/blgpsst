@@ -26,7 +26,7 @@ export default function CreatePost() {
   };
 
   return (
-    <Button onClick={handleClick} size="2" className="p-6">
+    <Button onClick={handleClick} size="3">
       {isLoading && <Icons.spinner />}
       <Icons.add /> Create
     </Button>

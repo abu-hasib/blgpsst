@@ -4,11 +4,12 @@ import { Post } from "@/types";
 import EditorJS from "@editorjs/editorjs";
 import Header from "@editorjs/header";
 import Link from "next/link";
-import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
+import { ButtonHTMLAttributes, ElementRef, FormEvent, useCallback, useEffect, useRef, useState } from "react";
 import { Icons } from "./icons";
 import { Button } from "@radix-ui/themes";
 import { useForm } from "react-hook-form";
 import { useSearchParams } from "next/navigation";
+import Image from "next/image";
 
 interface EditorProps {
   post: Post;
@@ -51,9 +52,15 @@ export default function Editor({ post }: EditorProps) {
   //   }, [isMounted, initEditor]);
   const [isSaving, setSave] = useState(false);
   const { register, handleSubmit } = useForm<FormData>();
+  const [isAddImage, setAddImage] = useState(false);
+  const fileRef = useRef<ElementRef<"input">>(null)
+  const handleClick = () => {
+   if(!fileRef.current) return
+   fileRef?.current?.click
+  }
 
   const onSubmit = async (data: any) => {
-    setSave(true)
+    setSave(true);
     const response = await fetch(`/api/posts`, {
       method: "PATCH",
       body: JSON.stringify({
@@ -62,8 +69,8 @@ export default function Editor({ post }: EditorProps) {
         content: data.content,
       }),
     });
-    if(!response.ok) throw new Error()
-    setSave(false)
+    if (!response.ok) throw new Error();
+    setSave(false);
   };
 
   return (
@@ -82,6 +89,23 @@ export default function Editor({ post }: EditorProps) {
         </div>
         <div id="editor">{/* <input type="text" value={post.title} /> */}</div>
         <div className="w-[800px] mx-auto space-y-4">
+          <div
+            className="flex items-center gap-2 p-1.5 rounded-xl hover:bg-[#e2e8f0] w-fit"
+            onClick={() => setAddImage(!isAddImage)}
+          >
+            <Icons.sun />
+            <span>Add cover</span>
+          </div>
+          {/* {isAddImage && (
+            <>
+              <Image src={""} width={100} height={100} alt="cover" />
+              <input ref={fileRef} type="file" name="" id="" className="hidden" />
+              <button onClick={handleClick}>
+
+              <Icons.add />
+              </button>
+            </>
+          )} */}
           <input
             type="text"
             placeholder="Untitled"

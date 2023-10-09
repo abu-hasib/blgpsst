@@ -1,6 +1,6 @@
 import { Post } from "@prisma/client";
 
-export type DashboardConfig = {
+export type SiteConfig = {
   mainNav: MainNavItem[];
   sidebarNav: SidebarNavItem[];
 };
